@@ -82,5 +82,3 @@ variable "subnet_ids" {
 variable "Secret_name" {
   default = "redshif-secret"
 }
-
-
