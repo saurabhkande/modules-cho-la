@@ -47,8 +47,39 @@
 # }
 
 
-# module "secrets" {
-#   source = "./modules/secret-manager"
-#   secrets       = local.secrets
-#   secret_names  = var.secret_names
-# }
+module "secrets" {
+  source = "./modules/secret-manager"
+  secrets       = local.secrets
+  secret_names  = var.secret_names
+}
+
+module "rds-postgres" {
+    source                                   = "./modules/rds"
+    identifier                               = var.identifier
+    pg_engine_version                        = var.pg_engine_version
+    pg_major_engine_version                  = var.pg_major_engine_version
+    pg_family                                = var.pg_family
+    pg_instance_class                        = var.pg_instance_class
+    pg_allocated_storage                     = var.pg_allocated_storage
+    pg_max_allocated_storage                 = var.pg_max_allocated_storage
+    db_name                                  = var.db_name
+    db_admin_user                            = var.db_admin_user
+    db_admin_password                        = module.secrets.postgres_secret_string
+    pg_port                                  = var.pg_port
+    pg_multi_az                              = var.pg_multi_az
+    pg_maintenance_window                    = var.pg_maintenance_window
+    pg_skip_final_snapshot                   = var.pg_skip_final_snapshot
+    pg_deletion_protection                   = var.pg_deletion_protection
+    pg_performance_insights_enabled          = var.pg_performance_insights_enabled
+    pg_performance_insights_retention_period = var.pg_performance_insights_retention_period
+    vpc_cidr                                 = var.vpc_cidr
+    existing_vpc_id                          = var.existing_vpc_id
+    private_subnets                          = var.private_subnets
+    tags                                     = local.tags
+    # db_subnet_group_name             = aws_db_subnet_group.postgres-sub-grp.name
+    # vpc_security_group_ids           = [aws_security_group.postgres_rds.id]
+    # monitoring_interval              = var.pg_monitoring_interval
+    # monitoring_role_arn              = aws_iam_role.rds_monitoring_role.arn
+    # parameter_group_name             = aws_db_parameter_group.db.name
+    # enabled_cloudwatch_logs_exports  = ["postgresql", "upgrade"]
+}

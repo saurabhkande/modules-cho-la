@@ -128,6 +128,113 @@ variable "secret_names" {
   type        = map(string)
   default = {
     "postgres" = "postgres-secret"
-    "redshift" = "redshift-secret"
+    # "redshift" = "redshift-secret"
   }
+}
+
+#------------------------------------ rds-podtgres--------------------------------#
+
+variable "identifier" {
+  default = "qlikdb"
+}
+
+variable "db_name" {
+  type        = string
+  description = "db name "
+  default     = "qlikdb"
+}
+variable "db_admin_user" {
+  type        = string
+  description = "db name "
+  default     = "administrator"
+}
+
+variable "pg_engine_version" {
+  type    = string
+  default = "16"
+}
+
+variable "pg_family" {
+  type    = string
+  default = "postgres16"
+}
+
+variable "pg_major_engine_version" {
+  type    = string
+  default = "16"
+}
+
+variable "pg_instance_class" {
+  type    = string
+  default = "db.t3.large"   
+}
+
+variable "pg_allocated_storage" {
+  type    = number
+  default = 50
+}
+
+variable "pg_max_allocated_storage" {
+  type    = number
+  default = 200
+}
+
+variable "pg_port" {
+  type    = number
+  default = 5432
+}
+
+variable "pg_multi_az" {
+  type    = bool
+  default = false
+}
+
+variable "pg_maintenance_window" {
+  type    = string
+  default = "Mon:00:00-Mon:03:00"
+}
+
+variable "pg_create_cloudwatch_log_group" {
+  type    = bool
+  default = true
+}
+
+variable "pg_skip_final_snapshot" {
+  type    = bool
+  default = true
+}
+
+variable "pg_deletion_protection" {
+  type    = bool
+  default = false
+}
+
+variable "pg_performance_insights_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "pg_performance_insights_retention_period" {
+  type    = number
+  default = 7
+}
+
+variable "pg_create_monitoring_role" {
+  type    = bool
+  default = true
+}
+
+variable "pg_monitoring_interval" {
+  type    = number
+  default = 60
+}
+
+
+variable "private_subnets" {
+  default = ["subnet-0e68f15b045efc505","subnet-0ec31018bcc807151"]
+}
+
+
+variable "vpc_cidr" {
+  default = "172.31.0.0/16"
 }
