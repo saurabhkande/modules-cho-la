@@ -37,11 +37,18 @@
 # }
 
 
-module "ec2_instance" {
-  source            = "./modules/ec2-instance"
-  instances         = local.instances
-  key_name          = var.key_name
-  user_data         = var.user_data
-  existing_vpc_id   = var.existing_vpc_id
-  tags              = local.tags
-}
+# module "ec2_instance" {
+#   source            = "./modules/ec2-instance"
+#   instances         = local.instances
+#   key_name          = var.key_name
+#   user_data         = var.user_data
+#   existing_vpc_id   = var.existing_vpc_id
+#   tags              = local.tags
+# }
+
+
+# module "secrets" {
+#   source = "./modules/secret-manager"
+#   secrets       = local.secrets
+#   secret_names  = var.secret_names
+# }

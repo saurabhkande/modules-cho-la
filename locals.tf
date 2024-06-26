@@ -17,6 +17,19 @@ locals {
       ebs_volume_size        = 300
     }
 }
+  
+   secrets = {
+     postgres = {
+       length    = 16
+       special   = false
+       min_upper = 1
+    }
+    redshift = {
+      length    = 16
+      special   = false
+      min_upper = 1
+    }
+}
   tags = {
     Env  = "Dev"
 

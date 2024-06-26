@@ -2,7 +2,7 @@ variable "region" {
   default = "us-east-2"
 }
 
-#----------------- code-commit----------------------#
+#----------------------------------- code-commit ------------------------------#
 
 variable "codecommit_repositories" {
   description = "Map of repositories to their email addresses"
@@ -16,18 +16,13 @@ variable "codecommit_repositories" {
     skpd_dataplatform = ["shankarganesh1@cholams.murugappa.com", "venkateswararaor@cholams.murugappa.com", "raja.chellappan@affine.ai", "balajikannan@cholams.murugappa.com","Agarwal.rahul@bcg.com"]
     skpd_superapp = ["shankarganesh1@cholams.murugappa.com", "venkateswararaor@cholams.murugappa.com", "raja.chellappan@affine.ai", "balajikannan@cholams.murugappa.com","Agarwal.rahul@bcg.com"]
     skpd_reporting = ["shankarganesh1@cholams.murugappa.com", "venkateswararaor@cholams.murugappa.com", "raja.chellappan@affine.ai", "balajikannan@cholams.murugappa.com","Agarwal.rahul@bcg.com"]
-
   }
 }
-
-
 variable "referance_destination_branches" {
   default = ["refs/heads/main","refs/heads/dev"]
 }
 
-
-
-#--------------------- Notification-rule--------------#
+#------------------------------- Notification-rule -----------------------------------------------#
 
 variable "event_type" {
   default = ["codecommit-repository-approvals-status-changed","codecommit-repository-pull-request-created"
@@ -50,13 +45,12 @@ variable "repository_approval_pools" {
   }
 }
 
-
 variable "No_of_approvers" {
   type = number
   default = 2
 }
 
-#------------------- redshift----------------------------#
+#------------------------------- redshift----------------------------------------------#
 
 variable "cluster_identifier"{
   default = "chola-redshift-cluster"
@@ -126,3 +120,14 @@ variable "existing_vpc_id" {
     default     = "vpc-060d498a495c5e28e"
 }
 
+
+#------------------------------------ secrets-----------------------------------#
+
+variable "secret_names" {
+  description = "A map of secret names"
+  type        = map(string)
+  default = {
+    "postgres" = "postgres-secret"
+    "redshift" = "redshift-secret"
+  }
+}
