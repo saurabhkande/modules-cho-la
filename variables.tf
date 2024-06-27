@@ -83,12 +83,12 @@ variable "ami_id" {
   default = "ami-08b66c1b6d6a8a30a"
 }
 
-variable "instance_type_1" {
-  default = "t2.micro"      #"r5a.4xlarge"
+variable "Qlik-Enterprise_instance_type" {
+  default = "r5a.4xlarge"      #"r5a.4xlarge"
 }
 
-variable "instance_type_2" {
-  default = "t2.medium"      #"r5a.2xlarge"
+variable "Qlik-NPrinting_instance_type" {
+  default = "r5a.2xlarge"      #"r5a.2xlarge"
 }
 
 variable "private_subnet_1" {
@@ -127,7 +127,7 @@ variable "secret_names" {
   description = "A map of secret names"
   type        = map(string)
   default = {
-    "postgres" = "postgres-secret"
+    "postgres" = "Qlik-postgres-secret"
     # "redshift" = "redshift-secret"
   }
 }

@@ -4,7 +4,6 @@ variable "instances" {
     ami               = string
     instance_type     = string
     subnet_id         = string
-    root_volume_size  = number
     ebs_volume_size   = number
     name              = string
   }))
@@ -29,6 +28,8 @@ variable "tags" {
   type        = map(string)
 }
 
-
+variable "vpc_cidr" {
+  
+}
 
 

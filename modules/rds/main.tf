@@ -3,6 +3,7 @@ resource "aws_db_instance" "db" {
   engine                           = "postgres"
   engine_version                   = var.pg_engine_version
   instance_class                   = var.pg_instance_class
+  allow_major_version_upgrade      = true
   allocated_storage                = var.pg_allocated_storage
   max_allocated_storage            = var.pg_max_allocated_storage
   db_name                          = var.db_name
@@ -23,14 +24,6 @@ resource "aws_db_instance" "db" {
   parameter_group_name             = aws_db_parameter_group.db.name
   tags                             = var.tags
 
-
-  # Optional properties
-#   backup_window                   = var.pg_backup_window
-#   backup_retention_period         = var.pg_backup_retention_period
-#   create_monitoring_role          = var.pg_create_monitoring_role
-#   monitoring_role_name            = var.pg_monitoring_role_name
-#   monitoring_role_use_name_prefix = var.pg_monitoring_role_use_name_prefix
-#   monitoring_role_description     = "SKPD_DB_MODEL_ROLE"
 }
 
 # PostgreSQL RDS security group
@@ -101,5 +94,5 @@ resource "aws_db_parameter_group" "db" {
 resource "aws_db_subnet_group" "postgres-sub-grp" {
   name       = "postgres-subnet-group"
   subnet_ids = var.private_subnets
-  tags = var.tags
+  tags       = var.tags
 }

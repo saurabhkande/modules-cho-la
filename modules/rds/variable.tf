@@ -1,13 +1,11 @@
 variable "db_name" {
   type        = string
   description = "db name "
-  default     = "skpddbmodel-db"
 }
 
 variable "db_admin_user" {
   type        = string
   description = "db name "
-  default     = "administrator"
 }
 
 variable "identifier" {

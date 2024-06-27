@@ -6,27 +6,21 @@ resource "aws_instance" "Qlik-instances" {
   vpc_security_group_ids = [aws_security_group.allow_rdp.id]
   key_name               = var.key_name
   user_data              = var.user_data
-  
-  root_block_device {
-    volume_size           = each.value.root_volume_size
-    volume_type           = "gp2"
-    delete_on_termination = true
-  }
 
   ebs_block_device {
     device_name           = "/dev/sda2"
     volume_size           = each.value.ebs_volume_size
     volume_type           = "gp2"
-    delete_on_termination = true
+    delete_on_termination = false
   }
 
   tags = merge(var.tags, { Name = each.value.name })
 }
 
 
-data "http" "myip" {
-  url = "https://ipv4.icanhazip.com"
-}
+# data "http" "myip" {
+#   url = "https://ipv4.icanhazip.com"
+# }
 
 resource "aws_security_group" "allow_rdp" {
   name        = "Qlik_allow_rdp_SG"
@@ -37,14 +31,14 @@ resource "aws_security_group" "allow_rdp" {
     from_port   = 51268
     to_port     = 51268
     protocol    = "tcp"
-    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = [var.vpc_cidr] #["${chomp(data.http.myip.response_body)}/32"]
   }
 
   ingress {
     from_port   = 51268
     to_port     = 51268
     protocol    = "udp"
-    cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = [var.vpc_cidr] #["${chomp(data.http.myip.response_body)}/32"]
   }
 
   egress {
@@ -55,3 +49,4 @@ resource "aws_security_group" "allow_rdp" {
   }
 }
 
+# [var.vpc_cidr]

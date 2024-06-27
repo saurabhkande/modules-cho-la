@@ -37,14 +37,15 @@
 # }
 
 
-# module "ec2_instance" {
-#   source            = "./modules/ec2-instance"
-#   instances         = local.instances
-#   key_name          = var.key_name
-#   user_data         = var.user_data
-#   existing_vpc_id   = var.existing_vpc_id
-#   tags              = local.tags
-# }
+module "ec2_instance" {
+  source            = "./modules/ec2-instance"
+  instances         = local.instances
+  key_name          = var.key_name
+  user_data         = var.user_data
+  vpc_cidr          = var.vpc_cidr
+  existing_vpc_id   = var.existing_vpc_id
+  tags              = local.tags
+}
 
 
 module "secrets" {
@@ -76,10 +77,5 @@ module "rds-postgres" {
     existing_vpc_id                          = var.existing_vpc_id
     private_subnets                          = var.private_subnets
     tags                                     = local.tags
-    # db_subnet_group_name             = aws_db_subnet_group.postgres-sub-grp.name
-    # vpc_security_group_ids           = [aws_security_group.postgres_rds.id]
-    # monitoring_interval              = var.pg_monitoring_interval
-    # monitoring_role_arn              = aws_iam_role.rds_monitoring_role.arn
-    # parameter_group_name             = aws_db_parameter_group.db.name
-    # enabled_cloudwatch_logs_exports  = ["postgresql", "upgrade"]
+
 }
